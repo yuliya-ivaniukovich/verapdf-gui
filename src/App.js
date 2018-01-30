@@ -11,7 +11,7 @@ class App extends React.Component {
             <div className="app">
                 <header>
                     <img src={logo} alt="logo"/>
-                    <b>PDF/A Conformance Checker</b>
+                    <h2>PDF/A Conformance Checker</h2>
                     <MaterialIcon icon="help" invert/>
                 </header>
                 <article className="files-info">
