@@ -11,9 +11,10 @@
 }
 
 .files-button {
-    border: 2px #407614;
+    border: 1pt solid #407614;
     border-radius: 10px;
     background-color: #70a84a;
+    width: 200px;
 }
 
 header {
