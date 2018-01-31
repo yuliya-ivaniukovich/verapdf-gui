@@ -5,6 +5,7 @@ import MaterialIcon from 'material-icons-react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Home from './home/Home';
+import HelpMenu from "./header/helpMenu/HelpMenu";
 
 class App extends React.Component {
     render() {
@@ -13,7 +14,7 @@ class App extends React.Component {
                 <header>
                     <img src={logo} alt="logo"/>
                     <h2>PDF/A Conformance Checker</h2>
-                    <MaterialIcon icon="help_outline" invert/>
+                    <HelpMenu/>
                 </header>
                 <article>
                     <Home/>
