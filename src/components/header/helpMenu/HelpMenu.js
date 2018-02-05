@@ -10,7 +10,8 @@ import {
     ModalFooter,
     Button
 } from 'reactstrap';
-import aboutVerapdf from './about-verapdf.PNG';
+import logo from './veraPDF-logo.jpg';
+import partners from './partners.png'
 import 'bootstrap/dist/css/bootstrap.css';
 import './HelpMenu.css';
 
@@ -36,7 +37,11 @@ class HelpMenu extends Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className='about-us-modal'>
                 <ModalHeader toggle={this.toggle}>About us</ModalHeader>
                 <ModalBody>
-                    <img src={aboutVerapdf} alt="about veraPDF"></img>
+                    <img src={logo} alt="veraPDF"></img>
+                    <p>© 2015 veraPDF Consortium</p>
+                    <p>Funded by the European Commission's PREFORMA Project</p>
+                    <img src={partners} alt="partners"></img>
+                    <p>Version: 1.10.6</p>
                 </ModalBody>
                 <ModalFooter>
                     <a href="http://verapdf.org/" target="_blank" className="visit-verapdforg">Visit veraPDF.org</a>

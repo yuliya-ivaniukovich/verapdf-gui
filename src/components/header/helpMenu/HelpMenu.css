@@ -57,6 +57,15 @@
     top:10%;
 }
 
+.modal-body{
+    text-align: center;
+    font-size: 15px;
+}
+
+img{
+    width: 100%;
+}
+
 .modal-header{
     height: 35px;
     border-bottom: none;
