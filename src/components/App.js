@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './vera-logo.png';
-import MaterialIcon from 'material-icons-react';
 
 import './App.css';
 import Home from './home/Home';
