@@ -7,17 +7,17 @@
     height: inherit;
 }
 
-.help-button:hover{
+.help-button:hover {
     color: white;
 }
 
-.dropdown{
+.dropdown {
     text-align: right;
     height: 100%;
     background-color: inherit;
 }
 
-.dropdown-menu{
+.dropdown-menu {
     width: 200px;
     margin: 0;
     border: #3d3d3d solid 1px;
@@ -28,17 +28,17 @@
     padding-bottom: 10px;
 }
 
-.dropdown-item{
+.dropdown-item {
     outline: none !important;
     color: #3d3d3d;
 }
 
-.dropdown-item:hover{
+.dropdown-item:hover {
     color: inherit;
-    background-color: rgba(150,150,150,0.1);
+    background-color: rgba(150, 150, 150, 0.1);
 }
 
-.divider{
+.divider {
     background-color: #3d3d3d;
     margin-left: 7%;
     margin-right: 7%;
@@ -49,32 +49,32 @@
     font-size: 30px;
 }
 
-.modal-footer{
+.modal-footer {
     justify-content: space-between;
 }
 
-.about-us-modal{
-    top:10%;
+.about-us-modal {
+    top: 10%;
 }
 
-.modal-body{
+.modal-body {
     text-align: center;
     font-size: 15px;
 }
 
-img{
+img {
     width: 100%;
 }
 
-.modal-header{
+.modal-header {
     height: 35px;
     border-bottom: none;
 }
 
-.modal-header >h4{
+.modal-header > h4 {
     font-size: 20px;
 }
 
-.modal-footer{
+.modal-footer {
     border-top: none;
 }

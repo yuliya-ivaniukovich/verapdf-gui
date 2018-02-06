@@ -10,8 +10,8 @@ import {
     ModalFooter,
     Button
 } from 'reactstrap';
-import logo from './veraPDF-logo.jpg';
-import partners from './partners.png'
+import logo from './images/veraPDF-logo.jpg';
+import partners from './images/partners.png'
 import 'bootstrap/dist/css/bootstrap.css';
 import './HelpMenu.css';
 
