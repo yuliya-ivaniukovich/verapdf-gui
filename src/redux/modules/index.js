@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {configuration} from './configuration';
+import configuration from './configuration';
 import filesToValidate from './filesToValidate';
 
 export const rootReducer = combineReducers({
