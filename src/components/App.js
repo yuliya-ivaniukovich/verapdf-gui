@@ -15,7 +15,7 @@ class App extends React.Component {
                     <HelpMenu/>
                 </header>
                 <article>
-                    <Home/>
+                    {this.renderArticle()}
                 </article>
                 <footer>
                     { /* Here will be components to control info view settings */ }
@@ -23,6 +23,20 @@ class App extends React.Component {
             </div>
         );
     }
+
+    renderArticle() {
+        switch (this.props.view) {
+            case 'VALIDATION':
+                return (<div>Validation started</div>);
+            case 'HOME':
+            default:
+                return (<Home/>);
+        }
+    }
 }
+
+App.defaultProps = {
+    view: 'HOME'
+};
 
 export default App;
