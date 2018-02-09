@@ -35,8 +35,4 @@ class App extends React.Component {
     }
 }
 
-App.defaultProps = {
-    view: 'HOME'
-};
-
 export default App;
