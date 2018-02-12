@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Upload extends React.Component {
+class SelectPDFButton extends React.Component {
     constructor(props) {
         super(props);
         this.setFileInput = this.setFileInput.bind(this);
@@ -19,7 +19,7 @@ class Upload extends React.Component {
 
     onFileSelected(event) {
         if (event.target.files.length > 0) {
-            this.props.onImport(event.target.files);
+            this.props.onSelect(event.target.files);
         }
     }
 
@@ -30,6 +30,7 @@ class Upload extends React.Component {
                 <input type="file"
                        name="packageFile"
                        multiple
+                       accept=".pdf"
                        ref={this.setFileInput}
                        onChange={ this.onFileSelected } hidden={true}/>
             </div>
@@ -37,9 +38,9 @@ class Upload extends React.Component {
     }
 }
 
-Upload.propTypes = {
+SelectPDFButton.propTypes = {
     renderButton: PropTypes.func.isRequired,
-    onImport: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired
 };
 
-export default Upload;
+export default SelectPDFButton;

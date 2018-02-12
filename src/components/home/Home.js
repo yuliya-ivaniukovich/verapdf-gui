@@ -1,14 +1,14 @@
 import React from 'react';
 import {Button} from 'reactstrap';
 import './Home.css';
-import Upload from "./Upload";
+import SelectPDFButton from "./SelectPDFButton.container";
 
 
 class Home extends React.Component {
     render() {
         return (
             <div className="home">
-                <Upload onImport={this.onImport} renderButton={(openFileDialog) => {
+                <SelectPDFButton renderButton={(openFileDialog) => {
                     return (
                         <Button color="success" className="files-button" onClick={openFileDialog}>
                             <span>Choose PDF file</span>
@@ -18,10 +18,6 @@ class Home extends React.Component {
                 }}/>
             </div>
         );
-    }
-
-    onImport = (files) => {
-        console.log(files);
     }
 }
 

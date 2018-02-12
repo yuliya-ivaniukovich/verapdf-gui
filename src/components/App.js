@@ -15,13 +15,23 @@ class App extends React.Component {
                     <HelpMenu/>
                 </header>
                 <article>
-                    <Home/>
+                    {this.renderArticle()}
                 </article>
                 <footer>
                     { /* Here will be components to control info view settings */ }
                 </footer>
             </div>
         );
+    }
+
+    renderArticle() {
+        switch (this.props.view) {
+            case 'VALIDATION':
+                return (<div>Validation started</div>);
+            case 'HOME':
+            default:
+                return (<Home/>);
+        }
     }
 }
 

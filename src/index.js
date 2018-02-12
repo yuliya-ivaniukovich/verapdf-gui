@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
-import App from './components/App';
+import App from './components/App.container';
 
 import {rootReducer} from './redux/modules';
 
