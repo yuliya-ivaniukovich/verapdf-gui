@@ -4,6 +4,8 @@ import logo from './vera-logo.png';
 import './App.css';
 import Home from './home/Home';
 import HelpMenu from "./header/helpMenu/HelpMenu";
+import Action from './action/Action';
+import {Button} from 'reactstrap';
 
 class App extends React.Component {
     render() {
