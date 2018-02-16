@@ -4,8 +4,9 @@ import logo from './vera-logo.png';
 import './App.css';
 import Home from './home/Home';
 import HelpMenu from "./header/helpMenu/HelpMenu";
-import Action from './action/Action';
-import {Button} from 'reactstrap';
+import ValidationAction from './action/ValidationAction.container';
+import FeaturesAction from './action/FeaturesAction.container';
+import PolicyAction from './action/PolicyAction.container';
 
 class App extends React.Component {
     render() {
@@ -18,6 +19,9 @@ class App extends React.Component {
                 </header>
                 <article>
                     {this.renderArticle()}
+                    <ValidationAction/>
+                    <FeaturesAction/>
+                    <PolicyAction/>
                 </article>
                 <footer>
                     { /* Here will be components to control info view settings */ }

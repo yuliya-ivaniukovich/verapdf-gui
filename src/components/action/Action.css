@@ -1,5 +1,32 @@
-.settings-btn, .settings-btn:hover, .settings-btn:focus, .settings-btn:active{
-    color: #387abf;
+.blocked-btn, .blocked-btn:hover, .blocked-btn:focus, .blocked-btn:active {
+    border: none;
+    color: #b7b7b7 !important;;
+    background-color: inherit !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    height: 32px;
+    padding: 0;
+    float: right;
+    position: relative;
+    clear: right;
+}
+
+.closed-btn, .closed-btn:hover, .closed-btn:focus, .closed-btn:active{
+    border: none;
+    color: #7d7d7d !important;
+    background-color: inherit !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    height: 32px;
+    padding: 0;
+    float: right;
+    position: relative;
+    clear: right;
+}
+
+
+.opened-btn, .opened-btn:hover, .opened-btn:focus, .opened-btn:active {
+    color: #397adf !important;
     border: 1px solid #d6d6d6 !important;
     border-radius: 15% 15% 0 0;
     background-color: inherit !important;
@@ -7,11 +34,11 @@
     margin: 0 !important;
     height: 32px;
     padding: 0;
-
     float: right;
     position: relative;
     clear: right;
 }
+
 .settings {
     position: relative;
     display: inline;
@@ -24,27 +51,33 @@
     width: inherit;
     border: 1px solid #d6d6d6;
     border-radius: 0 0 0 0;
-    top: -6px;
+    top: -1px;
 }
 
 .title {
     padding-left: 5px;
-    top: -7px;
     display: inline;
     position: relative;
 }
 
-.check-box {
+.check-box-btn, .check-box-btn:hover, .check-box-btn:focus, .check-box-btn:active {
+    color: #7d7d7d !important;
+    border: none;
+    background-color: inherit !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    height: 32px;
+    padding: 0;
     position: relative;
-    display: inline;
+    font-size: 24px;
 }
 
 i.material-icons.md-dark{
     font-size: 30px;
-    color: #7d7d7d;
+    color: inherit;
 }
 
 .action {
-    padding: 0 50px 0 50px;
+    padding: 5px 50px 5px 50px;
     width: 100%;
 }

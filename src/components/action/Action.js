@@ -11,21 +11,25 @@ class Action extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.renderSettingsBtn = this.renderSettingsBtn.bind(this);
-        this.state = {collapse: false};
+        this.state = {
+            collapse: false
+        };
     }
 
     toggle() {
-        this.setState({collapse: !this.state.collapse});
+        this.setState({
+            collapse: !this.state.collapse
+        });
     }
 
     renderSettingsBtn() {
-        let btnColor = this.props.checked ? (this.state.collapse ? '#397adf' : '#7d7d7d') : '#b7b7b7';
+        let btnClass = this.props.checked ? (this.state.collapse ? 'opened-btn' : 'closed-btn') : 'blocked-btn';
         if (this.props.collapsible) {
             if (this.props.checked) {
                 return (
                     <div className="settings">
-                        <Button onClick={this.toggle} className="settings-btn">
-                            <MaterialIcon color={btnColor} icon="settings"/>
+                        <Button onClick={this.toggle} className={btnClass}>
+                            <MaterialIcon icon="settings"/>
                         </Button>
                         <Collapse isOpen={this.state.collapse}>
                             <Card>
@@ -40,8 +44,8 @@ class Action extends React.Component {
             else {
                 return (
                     <div className="settings">
-                        <Button className="blocked-settings-btn">
-                            <MaterialIcon color={btnColor} icon="settings"/>
+                        <Button className={btnClass}>
+                            <MaterialIcon icon="settings"/>
                         </Button>
                     </div>
                 );
@@ -68,7 +72,9 @@ class Action extends React.Component {
     render() {
         return (
             <div className="action ">
-                <div className="check-box">{this.renderCheckBox()}</div>
+                <Button onClick={() => {this.props.setActive(!this.props.checked)}} className="check-box-btn">
+                    {this.renderCheckBox()}
+                </Button>
                 <div className="title">{this.props.title}</div>
                 {this.renderSettingsBtn()}
             </div>
@@ -80,7 +86,8 @@ Action.propTypes = {
     checked: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     collapsible: PropTypes.bool.isRequired,
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    setActive: PropTypes.func.isRequired
 };
 
 export default Action;
