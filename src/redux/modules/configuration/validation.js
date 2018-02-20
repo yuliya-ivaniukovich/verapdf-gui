@@ -1,7 +1,7 @@
 import {createAction, handleActions} from 'redux-actions';
 
 //- Actions
-export const setValidationActive = createAction('VALIDATION_ACTIVE_SET');
+export const toggleValidationActive = createAction('VALIDATION_ACTIVE_TOGGLE');
 
 //- State
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 
 //- Reducers
 export default handleActions({
-    VALIDATION_ACTIVE_SET: (state, action) => {
-        return {...state, active: action.payload};
+    VALIDATION_ACTIVE_TOGGLE: (state) => {
+        return {...state, active: !state.active};
     }
 }, initialState);

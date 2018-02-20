@@ -1,7 +1,7 @@
 import {createAction, handleActions} from 'redux-actions';
 
 //- Actions
-export const setFeaturesActive = createAction('FEATURES_ACTIVE_SET');
+export const toggleFeaturesActive = createAction('FEATURES_ACTIVE_TOGGLE');
 
 //- State
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 
 //- Reducers
 export default handleActions({
-    FEATURES_ACTIVE_SET: (state, action) => {
-        return {...state, active: action.payload};
+    FEATURES_ACTIVE_TOGGLE: (state) => {
+        return {...state, active: !state.active};
     }
 }, initialState);
