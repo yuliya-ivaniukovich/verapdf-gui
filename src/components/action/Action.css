@@ -1,83 +1,36 @@
-.blocked-btn, .blocked-btn:hover, .blocked-btn:focus, .blocked-btn:active {
-    border: none;
-    color: #b7b7b7 !important;;
-    background-color: inherit !important;
-    box-shadow: none !important;
-    margin: 0 !important;
+.action {
+    margin: 0.4rem 1rem 0 1.5rem;
+}
+
+.action .disabled-btn, .action .closed-btn, .action .opened-btn {
+    display: inline-block;
     height: 32px;
-    padding: 0;
+    cursor: pointer;
     float: right;
-    position: relative;
-    clear: right;
 }
 
-.closed-btn, .closed-btn:hover, .closed-btn:focus, .closed-btn:active{
-    border: none;
-    color: #7d7d7d !important;
-    background-color: inherit !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    height: 32px;
-    padding: 0;
-    float: right;
-    position: relative;
-    clear: right;
+.action .disabled-btn {
+    color: #b7b7b7 !important;
 }
 
-
-.opened-btn, .opened-btn:hover, .opened-btn:focus, .opened-btn:active {
-    color: #397adf !important;
-    border: 1px solid #d6d6d6 !important;
-    border-radius: 15% 15% 0 0;
-    background-color: inherit !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    height: 32px;
-    padding: 0;
-    float: right;
-    position: relative;
-    clear: right;
-}
-
-.settings {
-    position: relative;
-    display: inline;
-}
-
-.card {
-    text-align: left;
-    clear: right;
-    position: relative;
-    width: inherit;
+.action .opened-btn {
     border: 1px solid #d6d6d6;
-    border-radius: 0 0 0 0;
-    top: -1px;
+    color: #397adf;
+    border-radius: 15% 15% 0 0;
 }
 
-.title {
-    padding-left: 5px;
-    display: inline;
-    position: relative;
+.action .card {
+    border-radius: 0;
+    border: 1px solid #d6d6d6;
+    padding: 1rem;
 }
 
-.check-box-btn, .check-box-btn:hover, .check-box-btn:focus, .check-box-btn:active {
-    color: #7d7d7d !important;
-    border: none;
-    background-color: inherit !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-    height: 32px;
-    padding: 0;
-    position: relative;
-    font-size: 24px;
-}
-
-i.material-icons.md-dark{
-    font-size: 30px;
+.action i.material-icons.md-dark {
+    font-size: 29px;
     color: inherit;
 }
 
-.action {
-    padding: 5px 50px 5px 50px;
-    width: 100%;
+.action .collapse, .collapsing {
+    position: relative;
+    top: -5px;
 }

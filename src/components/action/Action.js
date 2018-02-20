@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MaterialIcon from 'material-icons-react';
-import {Collapse, Button, CardBody, Card} from 'reactstrap';
+import {Collapse} from 'reactstrap';
+import CheckBox from './checkBox/CheckBox';
 
 import "./Action.css"
 
@@ -9,76 +10,57 @@ class Action extends React.Component {
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
+        this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
+        this.toggleCollapse = this.toggleCollapse.bind(this);
         this.renderSettingsBtn = this.renderSettingsBtn.bind(this);
         this.state = {
             collapse: false
         };
     }
 
-    toggle() {
-        this.setState({
-            collapse: !this.state.collapse
-        });
-    }
-
-    renderSettingsBtn() {
-        let btnClass = this.props.checked ? (this.state.collapse ? 'opened-btn' : 'closed-btn') : 'blocked-btn';
-        if (this.props.collapsible) {
-            if (this.props.checked) {
-                return (
-                    <div className="settings">
-                        <Button onClick={this.toggle} className={btnClass}>
-                            <MaterialIcon icon="settings"/>
-                        </Button>
-                        <Collapse isOpen={this.state.collapse}>
-                            <Card>
-                                <CardBody>
-                                    {this.props.children}
-                                </CardBody>
-                            </Card>
-                        </Collapse>
-                    </div>
-                );
-            }
-            else {
-                return (
-                    <div className="settings">
-                        <Button className={btnClass}>
-                            <MaterialIcon icon="settings"/>
-                        </Button>
-                    </div>
-                );
-            }
-        }
-        else {
-            return null;
+    toggleCollapse() {
+        if (this.props.checked || !this.props.collapsible) {
+            this.setState({
+                collapse: !this.state.collapse
+            });
         }
     }
 
-    renderCheckBox() {
-        if (this.props.checked) {
-            return (
-                <MaterialIcon icon="check_box"/>
-            );
+    onCheckBoxChange() {
+        if (this.props.checked && this.props.collapsible) {
+            this.setState({
+                collapse: false
+            });
         }
         else {
-            return (
-                <MaterialIcon icon="check_box_outline_blank"/>
-            );
+            this.toggleCollapse();
         }
+
+        this.props.onToggleActive();
     }
 
     render() {
         return (
-            <div className="action ">
-                <Button onClick={() => {this.props.setActive(!this.props.checked)}} className="check-box-btn">
-                    {this.renderCheckBox()}
-                </Button>
-                <div className="title">{this.props.title}</div>
+            <div className="action">
+                <CheckBox checked={this.props.checked} title={this.props.title} onChange={this.onCheckBoxChange}/>
                 {this.renderSettingsBtn()}
+                <Collapse isOpen={this.state.collapse}>
+                    <div className="card">{this.props.children}</div>
+                </Collapse>
             </div>
         );
+    }
+
+    renderSettingsBtn() {
+        let btnClass = this.props.checked ? (this.state.collapse ? 'opened-btn' : 'closed-btn') : 'disabled-btn';
+
+        if (this.props.collapsible) {
+            return (
+                <div className={btnClass} onClick={this.toggleCollapse}>
+                    <MaterialIcon icon="settings"/>
+                </div>
+            );
+        }
     }
 }
 
@@ -86,8 +68,8 @@ Action.propTypes = {
     checked: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     collapsible: PropTypes.bool.isRequired,
-    children: PropTypes.object.isRequired,
-    setActive: PropTypes.func.isRequired
+    children: PropTypes.object,
+    onToggleActive: PropTypes.func.isRequired
 };
 
 export default Action;

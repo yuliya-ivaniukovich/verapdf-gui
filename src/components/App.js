@@ -3,10 +3,8 @@ import logo from './vera-logo.png';
 
 import './App.css';
 import Home from './home/Home';
+import Validation from './validation/Validation';
 import HelpMenu from "./header/helpMenu/HelpMenu";
-import ValidationAction from './action/ValidationAction.container';
-import FeaturesAction from './action/FeaturesAction.container';
-import PolicyAction from './action/PolicyAction.container';
 
 class App extends React.Component {
     render() {
@@ -19,12 +17,9 @@ class App extends React.Component {
                 </header>
                 <article>
                     {this.renderArticle()}
-                    <ValidationAction/>
-                    <FeaturesAction/>
-                    <PolicyAction/>
                 </article>
                 <footer>
-                    { /* Here will be components to control info view settings */ }
+                    {/* Here will be components to control info view settings */}
                 </footer>
             </div>
         );
@@ -33,7 +28,7 @@ class App extends React.Component {
     renderArticle() {
         switch (this.props.view) {
             case 'VALIDATION':
-                return (<div>Validation started</div>);
+                return (<Validation/>);
             case 'HOME':
             default:
                 return (<Home/>);
