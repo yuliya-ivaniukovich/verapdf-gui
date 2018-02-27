@@ -1,9 +1,9 @@
 import React from 'react';
 import {Collapse} from 'reactstrap';
-import File from './File.js'
-import _ from 'lodash'
+import File from './file/File.container.js'
 import SelectPDFButton from '../home/SelectPDFButton.container';
 import MaterialIcon from 'material-icons-react';
+import _ from 'lodash';
 
 import './SelectedFiles.css';
 
@@ -19,20 +19,23 @@ class SelectedFiles extends React.Component {
     }
 
     toggleOpen() {
-        this.setState({...this.state,open: !this.state.open});
+        this.setState({
+            ...this.state,
+            open: !this.state.open
+        });
     }
 
     renderFiles() {
         return (
             _.keys(this.props.files)
                 .map(file => {
-                    return (<File key={file} onDel={this.props.onDel} path={file}/>);
+                    return (<File key={file} path={file}/>);
                 })
         );
     }
 
     render() {
-        let fileNum = _.keys(this.props.files).length;
+        let fileNum = _.size(this.props.files);
         return (
             <div className="selected-files">
                 <h5>Selected {fileNum} {fileNum > 1 ? 'files' : 'file'}</h5>

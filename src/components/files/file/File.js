@@ -10,7 +10,9 @@ class File extends React.Component {
             <div className="file">
                 <MaterialIcon icon="insert_drive_file"/>
                 <span className="path">{this.props.path}</span>
-                <div className="del-btn" onClick={()=>{this.props.onDel(this.props.path)}}><MaterialIcon icon="clear"/></div>
+                <div className="del-btn" onClick={() => {this.props.onDel(this.props.path)}}>
+                    <MaterialIcon icon="clear"/>
+                </div>
             </div>
         );
     }
