@@ -3,11 +3,10 @@ import _ from 'lodash';
 
 //- Actions
 export const addFiles = createAction('FILES_TO_VALIDATE_ADD', files => files);
+export const delFile = createAction('FILE_TO_VALIDATE_DEL');
 
 //- State
-const initialState = {
-
-};
+const initialState = {};
 
 //- Reducers
 export default handleActions({
@@ -15,6 +14,11 @@ export default handleActions({
         return {
             ...state,
             ..._.mapValues(action.payload, file => ({...file, status: null}))
+        };
+    },
+    FILE_TO_VALIDATE_DEL: (state, action) => {
+        return {
+            ..._.pick(state, _.keys(state).filter(file => (file !== action.payload)))
         };
     }
 }, initialState);
