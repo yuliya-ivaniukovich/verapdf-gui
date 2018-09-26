@@ -1,13 +1,14 @@
-import {connect} from 'react-redux';
-import {toggleFeaturesActive} from '../../redux/modules/configuration/features';
+import { connect } from 'react-redux';
+import { toggleFeaturesActive } from '../../redux/modules/configuration/features';
 import Action from './Action';
-
+import React from 'react';
+import FeaturesAction from './FeatureAction';
 const mapStateToProps = state => {
     return {
         checked: state.configuration.features.active,
-        title: "Extract Features",
+        title: 'Extract Features',
         collapsible: true,
-        children: null
+        children: <FeaturesAction state={state} />
     };
 };
 
@@ -19,4 +20,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Action);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Action);
