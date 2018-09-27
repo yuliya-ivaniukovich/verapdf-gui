@@ -1,8 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 
 //- Actions
-export const toggleFeaturesActive = createAction('FEATURES_ACTIVE_TOGGLE');
-export const addSelectedFeatures = createAction('ADD_SELECTED_FEATURES');
+export const featuresActions = {
+    toggleFeaturesActive: createAction('FEATURES_ACTIVE_TOGGLE'),
+    addSelectedFeatures: createAction('SELECTED_FEATURES_ADD')
+};
 
 //- State
 const initialState = {
@@ -18,7 +20,7 @@ export default handleActions(
         FEATURES_ACTIVE_TOGGLE: state => {
             return { ...state, active: !state.active };
         },
-        ADD_SELECTED_FEATURES: (state, action) => {
+        SELECTED_FEATURES_ADD: (state, action) => {
             return { ...state, selectedFeatures: action.payload };
         }
     },

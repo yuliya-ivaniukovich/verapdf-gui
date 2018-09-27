@@ -1,8 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 
 //- Actions
-export const togglePolicyActive = createAction('POLICY_ACTIVE_TOGGLE');
-export const getPolicyFilePath = createAction('GET_POLICY_FILE_PATH');
+export const policyActions = {
+    togglePolicyActive: createAction('POLICY_ACTIVE_TOGGLE'),
+    getPolicyFilePath: createAction('POLICY_FILE_PATH_GET')
+};
 //- State
 const initialState = {
     active: false,
@@ -15,7 +17,7 @@ export default handleActions(
         POLICY_ACTIVE_TOGGLE: state => {
             return { ...state, active: !state.active };
         },
-        GET_POLICY_FILE_PATH: (state, action) => {
+        POLICY_FILE_PATH_GET: (state, action) => {
             return { ...state, policyFilePath: action.payload };
         }
     },
