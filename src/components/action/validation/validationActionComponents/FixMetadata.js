@@ -7,6 +7,7 @@ function FixMetadata(props) {
             <div>
                 <span className="file-save-label">save fixed file to:</span>
                 <input
+                    readOnly
                     className="save-fixed-file"
                     placeholder="Near source file"
                     type="text"

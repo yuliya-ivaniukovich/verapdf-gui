@@ -29,7 +29,9 @@ class ValidationProfile extends Component {
                     type="file"
                     ref={input => (this.fileInput = input)}
                 />
+
                 <input
+                    readOnly
                     className="input-path"
                     defaultValue={profilePath}
                     type="text"
