@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Action from '../Action';
 import ValidationSettings from './validationActionComponents/ValidationSettings';
@@ -17,5 +18,10 @@ class ValidationAction extends Component {
         );
     }
 }
+
+ValidationAction.propTypes = {
+    checked: PropTypes.bool.isRequired,
+    onToggleActive: PropTypes.func.isRequired
+};
 
 export default ValidationAction;
