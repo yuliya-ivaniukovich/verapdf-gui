@@ -1,13 +1,18 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import "./ValidationProfileSelect.css";
+import './ValidationProfileSelect.css';
 
 class ValidationProfileSelect extends Component {
     render() {
-        const { getInputValue, profilesValues } = this.props;
+        const { getInputValue, profilesValues, toggleShowInput } = this.props;
         return (
             <select
-                onChange={e => getInputValue(e.target.value)}
+                onChange={e => {
+                    let isShow = e.target.value === 'custom';
+                    isShow ? toggleShowInput(isShow) : toggleShowInput(isShow);
+                    getInputValue(e.target.value);
+                }}
                 className="validation-profile-select"
             >
                 {profilesValues.map((value, idx) => (
@@ -17,5 +22,10 @@ class ValidationProfileSelect extends Component {
         );
     }
 }
+
+ValidationProfileSelect.propTypes = {
+    getInputValue: PropTypes.func.isRequired,
+    profilesValues: PropTypes.array.isRequired
+};
 
 export default ValidationProfileSelect;
