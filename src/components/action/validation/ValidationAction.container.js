@@ -4,13 +4,13 @@ import { validationActions } from '../../../redux/modules/configuration/validati
 import ValidationAction from './ValidatinAction';
 
 const {
-    toggleFixMetadata,
-    toggleIncludeInformation,
-    toggleStopValidation,
     selectValidationProfile,
-    getProfilePath,
-    selectAmountFails,
-    selectPrefix
+    setCustomProfilePath,
+    toggleFixMetadata,
+    selectFixedFilePrefix,
+    toggleReportPassedRules,
+    toggleStopValidationThreshold,
+    selectAmountOfFailedChecks
 } = validationActions;
 
 const mapStateToProps = state => {
@@ -18,13 +18,14 @@ const mapStateToProps = state => {
         checked: state.configuration.validation.active,
         profilesValues: state.validationProfiles,
         profile: state.configuration.validation.profile,
-        profilePath: state.configuration.validation.profileFilePath,
-        prefix: state.configuration.validation.prefix,
-        amountFails: state.configuration.validation.amountFails,
-        includeInformation:
-            state.configuration.validation.includeInformationInReport,
+        profileFilePath: state.configuration.validation.profileFilePath,
+        fixedFilePrefix: state.configuration.validation.fixedFilePrefix,
+        reportPassedRules: state.configuration.validation.reportPassedRules,
         isFixMetadata: state.configuration.validation.fixMetadata,
-        stopValidation: state.configuration.validation.stopValidation
+        stopValidationThreshold:
+            state.configuration.validation.stopValidationThreshold,
+        amountOfFailedChecks:
+            state.configuration.validation.amountOfFailedChecks
     };
 };
 
@@ -35,12 +36,15 @@ const mapDispatchToProps = dispatch => {
         },
         getValidationProfileValue: value =>
             dispatch(selectValidationProfile(value)),
+        setCustomProfilePath: path => dispatch(setCustomProfilePath(path)),
         selectFixMetadata: () => dispatch(toggleFixMetadata()),
-        selectIncludeInformation: () => dispatch(toggleIncludeInformation()),
-        getProfilePath: path => dispatch(getProfilePath(path)),
-        selectStopValidation: () => dispatch(toggleStopValidation()),
-        selectAmoutFails: e => dispatch(selectAmountFails(e.target.value)),
-        selectPrefix: e => dispatch(selectPrefix(e.target.value))
+        selectFixedFilePrefix: prefix =>
+            dispatch(selectFixedFilePrefix(prefix)),
+        toggleReportPassedRules: () => dispatch(toggleReportPassedRules()),
+        toggleStopValidationThreshold: () =>
+            dispatch(toggleStopValidationThreshold()),
+        selectAmountOfFailedChecks: failedCheks =>
+            dispatch(selectAmountOfFailedChecks(failedCheks))
     };
 };
 
