@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
-function FixMetadata(props) {
-    const { prefix, selectPrefix } = props;
+function FixMetadata({ fixedFilePrefix, selectFixedFilePrefix }) {
     return (
         <Fragment>
             <div>
@@ -18,13 +18,18 @@ function FixMetadata(props) {
                 <span className="prefix-label">with prefix:</span>
                 <input
                     className="input-prefix-value"
-                    onChange={e => selectPrefix(e)}
+                    onChange={e => selectFixedFilePrefix(e.target.value)}
                     type="text"
-                    defaultValue={prefix}
+                    defaultValue={fixedFilePrefix}
                 />
             </div>
         </Fragment>
     );
 }
+
+FixMetadata.propTypes = {
+    fixedFilePrefix: PropTypes.string.isRequired,
+    selectFixedFilePrefix: PropTypes.func.isRequired
+};
 
 export default FixMetadata;
