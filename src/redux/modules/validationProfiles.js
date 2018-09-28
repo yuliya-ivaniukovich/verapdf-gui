@@ -2,8 +2,8 @@ import { handleActions } from 'redux-actions';
 
 //state
 const initialState = [
-    'custom',
     'auto-detect',
+    'custom',
     'pdf/a-1a',
     'pdf/a-1b',
     'pdf/a-2a',
