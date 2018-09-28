@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { Collapse } from 'reactstrap';
 
 import CheckBox from '../../checkBox/CheckBox';
 import './ValidationSettings.css';
@@ -8,33 +10,46 @@ import FixMetadata from './FixMetadata';
 class ValidationSettings extends Component {
     fileInput = null;
 
-    render() {
-        const titleInformation =
-            'include information on passed rules into the report';
+    renderStopValidationTitle = () => {
+        const { amountOfFailedChecks, selectAmountOfFailedChecks } = this.props;
+        return (
+            <Fragment>
+                <span>Stop validation after</span>
+                <input
+                    defaultValue={amountOfFailedChecks}
+                    onChange={e => selectAmountOfFailedChecks(e.target.value)}
+                    className="failed-checks-input"
+                    type="number"
+                />
+                <span>failed checks</span>
+            </Fragment>
+        );
+    };
 
+    render() {
         const {
+            profile,
             profilesValues,
+            profileFilePath,
             getValidationProfileValue,
+            setCustomProfilePath,
             isFixMetadata,
             selectFixMetadata,
-            profilePath,
-            includeInformation,
-            selectIncludeInformation,
-            selectPrefix,
-            stopValidation,
-            amountFails,
-            prefix,
-            selectStopValidation,
-            selectAmoutFails,
-            getProfilePath
+            fixedFilePrefix,
+            selectFixedFilePrefix,
+            reportPassedRules,
+            toggleReportPassedRules,
+            stopValidationThreshold,
+            toggleStopValidationThreshold
         } = this.props;
 
         return (
             <div>
                 <ValidationProfile
+                    porfile={profile}
                     profilesValues={profilesValues}
-                    getProfilePath={getProfilePath}
-                    profilePath={profilePath}
+                    setCustomProfilePath={setCustomProfilePath}
+                    profileFilePath={profileFilePath}
                     getValidationProfileValue={getValidationProfileValue}
                 />
                 <div>
@@ -44,29 +59,46 @@ class ValidationSettings extends Component {
                         onChange={selectFixMetadata}
                     />
                 </div>
-                <FixMetadata selectPrefix={selectPrefix} prefix={prefix} />
+                <Collapse isOpen={isFixMetadata}>
+                    <FixMetadata
+                        selectFixedFilePrefix={selectFixedFilePrefix}
+                        fixedFilePrefix={fixedFilePrefix}
+                    />
+                </Collapse>
+
                 <CheckBox
-                    title={titleInformation}
-                    checked={includeInformation}
-                    onChange={selectIncludeInformation}
+                    title="Include information on passed rules into the report"
+                    checked={reportPassedRules}
+                    onChange={toggleReportPassedRules}
                 />
                 <div className="validation-checks-fail-container">
                     <CheckBox
-                        checked={stopValidation}
-                        title="Stop validation after "
-                        onChange={selectStopValidation}
+                        checked={stopValidationThreshold}
+                        title={this.renderStopValidationTitle()}
+                        onChange={toggleStopValidationThreshold}
                     />
-                    <input
-                        defaultValue={amountFails}
-                        onChange={e => selectAmoutFails(e)}
-                        className="failed-checks-input"
-                        type="number"
-                    />
-                    <span>failed checks</span>
                 </div>
             </div>
         );
     }
 }
+
+ValidationSettings.propTypes = {
+    profile: PropTypes.string.isRequired,
+    profilesValues: PropTypes.array.isRequired,
+    profileFilePath: PropTypes.string,
+    getValidationProfileValue: PropTypes.func.isRequired,
+    setCustomProfilePath: PropTypes.func.isRequired,
+    isFixMetadata: PropTypes.bool.isRequired,
+    selectFixMetadata: PropTypes.func.isRequired,
+    fixedFilePrefix: PropTypes.string.isRequired,
+    selectFixedFilePrefix: PropTypes.func.isRequired,
+    reportPassedRules: PropTypes.bool.isRequired,
+    toggleReportPassedRules: PropTypes.func.isRequired,
+    stopValidationThreshold: PropTypes.bool.isRequired,
+    toggleStopValidationThreshold: PropTypes.func.isRequired,
+    amountOfFailedChecks: PropTypes.number.isRequired,
+    selectAmountOfFailedChecks: PropTypes.func.isRequired
+};
 
 export default ValidationSettings;
