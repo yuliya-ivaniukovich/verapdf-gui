@@ -3,25 +3,32 @@ import { createAction, handleActions } from 'redux-actions';
 //- Actions
 export const validationActions = {
     toggleValidationActive: createAction('VALIDATION_ACTIVE_TOGGLE'),
-    toggleFixMetadata: createAction('FIX_METADATA_TOGGLE'),
-    toggleIncludeInformation: createAction('INCLUDE_INFORMATION_TOGGLE'),
-    toggleStopValidation: createAction('VAIDATION_STOP_TOGGLE'),
     selectValidationProfile: createAction('VALIDATION_PROFILE_SELECT'),
-    getProfilePath: createAction('PROFILE_GET_PATH'),
-    selectAmountFails: createAction('AMOUNT_FAILS_SELECT'),
-    selectPrefix: createAction('SELECT_PREFIX')
+    setCustomProfilePath: createAction('VALIDATION_CUSTOM_PROFILE_PATH_SET'),
+    toggleFixMetadata: createAction('VALIDATION_FIX_METADATA_TOGGLE'),
+    selectFixedFilePrefix: createAction('VALIDATION_FIXED_FILE_PREFIX_SELECT'),
+    toggleReportPassedRules: createAction(
+        'VALIDATION_REPORT_PASSED_RULES_TOGGLE'
+    ),
+    toggleStopValidationThreshold: createAction(
+        'VAIDATION_STOP_THRESHOLD_TOGGLE'
+    ),
+    selectAmountOfFailedChecks: createAction(
+        'VALIDATION_AMOUNT_0F_FAILED_CHECKS_SELECT',
+        failedCheks => +failedCheks
+    )
 };
 
 //- State
 const initialState = {
     active: false,
-    profile: 'custom',
-    profileFilePath: null,
+    profile: 'auto-detected',
+    profileFilePath: undefined,
     fixMetadata: false,
-    prefix: 'veraFixMd_',
-    includeInformationInReport: false,
-    stopValidation: false,
-    amountFails: 100
+    fixedFilePrefix: 'veraFixMd_',
+    reportPassedRules: false,
+    stopValidationThreshold: false,
+    amountOfFailedChecks: 100 // stops file check after amount of failed checks
 };
 
 //- Reducers
@@ -33,34 +40,34 @@ export default handleActions(
         VALIDATION_PROFILE_SELECT: (state, action) => {
             return { ...state, profile: action.payload };
         },
-        PROFILE_GET_PATH: (state, action) => {
+        VALIDATION_CUSTOM_PROFILE_PATH_SET: (state, action) => {
             return { ...state, profileFilePath: action.payload };
         },
-        FIX_METADATA_TOGGLE: state => {
+        VALIDATION_FIX_METADATA_TOGGLE: state => {
             return { ...state, fixMetadata: !state.fixMetadata };
         },
-        SELECT_PREFIX: (state, action) => {
+        VALIDATION_FIXED_FILE_PREFIX_SELECT: (state, action) => {
             return {
                 ...state,
-                prefix: action.payload
+                fixedFilePrefix: action.payload
             };
         },
-        INCLUDE_INFORMATION_TOGGLE: state => {
+        VALIDATION_REPORT_PASSED_RULES_TOGGLE: state => {
             return {
                 ...state,
-                includeInformationInReport: !state.includeInformationInReport
+                reportPassedRules: !state.reportPassedRules
             };
         },
-        VAIDATION_STOP_TOGGLE: state => {
+        VAIDATION_STOP_THRESHOLD_TOGGLE: state => {
             return {
                 ...state,
-                stopValidation: !state.stopValidation
+                stopValidationThreshold: !state.stopValidationThreshold
             };
         },
-        AMOUNT_FAILS_SELECT: (state, action) => {
+        VALIDATION_AMOUNT_0F_FAILED_CHECKS_SELECT: (state, action) => {
             return {
                 ...state,
-                amountFails: action.payload
+                amountOfFailedChecks: action.payload
             };
         }
     },
