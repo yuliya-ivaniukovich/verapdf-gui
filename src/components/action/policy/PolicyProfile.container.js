@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 
 import { policyActions } from '../../../redux/modules/configuration/policy';
-import PolicyAction from './PolicyAction';
+import PolicyProfile from './PolicyProfile';
 
-const { togglePolicyActive } = policyActions;
+const {  getPolicyFilePath } = policyActions;
 
 const mapStateToProps = state => {
     return {
-        checked: state.configuration.policy.active,
+        policyFilePath: state.configuration.policy.policyFilePath
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onToggleActive: () => {
-            dispatch(togglePolicyActive());
+        getPolicyFilePath: policyFileInput => {
+            dispatch(getPolicyFilePath(policyFileInput));
         }
     };
 };
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PolicyAction);
+)(PolicyProfile);
