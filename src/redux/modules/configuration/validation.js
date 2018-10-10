@@ -11,7 +11,7 @@ export const validationActions = {
         'VALIDATION_REPORT_PASSED_RULES_TOGGLE'
     ),
     toggleStopValidationThreshold: createAction(
-        'VAIDATION_STOP_THRESHOLD_TOGGLE'
+        'VALIDATION_STOP_THRESHOLD_TOGGLE'
     ),
     selectAmountOfFailedChecks: createAction(
         'VALIDATION_AMOUNT_0F_FAILED_CHECKS_SELECT',
@@ -58,7 +58,7 @@ export default handleActions(
                 reportPassedRules: !state.reportPassedRules
             };
         },
-        VAIDATION_STOP_THRESHOLD_TOGGLE: state => {
+        VALIDATION_STOP_THRESHOLD_TOGGLE: state => {
             return {
                 ...state,
                 stopValidationThreshold: !state.stopValidationThreshold
