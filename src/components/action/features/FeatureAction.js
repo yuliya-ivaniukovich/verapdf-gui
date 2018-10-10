@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Action from '../Action';
-import FeaturesSettings from './FeaturesSettings';
+import FeaturesSettings from './FeaturesSettings.container';
 
 class FeaturesAction extends Component {
     render() {
@@ -11,7 +11,7 @@ class FeaturesAction extends Component {
                 checked={this.props.checked}
                 onToggleActive={this.props.onToggleActive}
             >
-                <FeaturesSettings {...this.props} />
+                <FeaturesSettings />
             </Action>
         );
     }
