@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 class FeaturesSettings extends Component {
     
@@ -22,5 +23,8 @@ class FeaturesSettings extends Component {
         );
     }
 }
-
+FeaturesSettings.propTypes = {
+    selectedFeatures: PropTypes.array.isRequired,
+    featuresValues: PropTypes.array.isRequired
+}
 export default FeaturesSettings;

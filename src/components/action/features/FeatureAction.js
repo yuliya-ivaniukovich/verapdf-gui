@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import Action from '../Action';
 import FeaturesSettings from './FeaturesSettings.container';
+import PropTypes from 'prop-types';
 
 class FeaturesAction extends Component {
     render() {
@@ -16,5 +18,8 @@ class FeaturesAction extends Component {
         );
     }
 }
-
+FeaturesAction.propTypes = {
+    checked: PropTypes.bool.isRequired,
+    onToggleActive: PropTypes.func.isRequired
+}
 export default FeaturesAction;
