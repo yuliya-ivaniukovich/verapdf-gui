@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Action from '../Action';
-import ValidationSettings from './validationActionComponents/ValidationSettings';
+import ValidationSettings from './validationActionComponents/ValidationSettings.container';
 
 class ValidationAction extends Component {
     render() {
@@ -13,7 +13,7 @@ class ValidationAction extends Component {
                 collapsible
                 onToggleActive={this.props.onToggleActive}
             >
-                <ValidationSettings {...this.props} />
+                <ValidationSettings />
             </Action>
         );
     }
