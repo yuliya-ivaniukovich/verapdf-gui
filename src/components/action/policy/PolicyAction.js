@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+
 import Action from '../Action';
 import PolicyProfile from './PolicyProfile';
+
 class PolicyAction extends Component {
     render() {
         return (
@@ -10,10 +13,13 @@ class PolicyAction extends Component {
                 checked={this.props.checked}
                 onToggleActive={this.props.onToggleActive}
             >
-                <PolicyProfile {...this.props} />
+                <PolicyProfile  />
             </Action>
         );
     }
 }
-
+PolicyAction.propType = {
+    checked: PropTypes.bool.isRequired,
+    onToggleActive: PropTypes.func.isRequired
+}
 export default PolicyAction;

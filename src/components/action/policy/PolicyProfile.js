@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class PolicyProfile extends Component {
     policyFileInput = null;
@@ -40,4 +41,8 @@ class PolicyProfile extends Component {
     }
 }
 
+PolicyProfile.propTypes = {
+    policyFilePath: PropTypes.string.isRequired,
+    getPolicyFilePath: PropTypes.func.isRequired
+}
 export default PolicyProfile;
