@@ -43,7 +43,7 @@ class SelectedFiles extends React.Component {
                 <Collapse isOpen={this.state.open}>
                     {this.renderFiles()}
                 </Collapse>
-                <SelectPDFButton renderButton={(openFileDialog) => {
+                <SelectPDFButton createJob={false} renderButton={(openFileDialog) => {
                     return (
                         <div className="files-button" onClick={openFileDialog}>
                             <MaterialIcon icon="add_circle_outline"/>

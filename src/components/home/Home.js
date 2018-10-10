@@ -8,7 +8,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className="home">
-                <SelectPDFButton renderButton={(openFileDialog) => {
+                <SelectPDFButton createJob={true} renderButton={(openFileDialog) => {
                     return (
                         <Button color="success" className="files-button" onClick={openFileDialog}>
                             <span>Choose PDF file</span>
