@@ -1,18 +1,21 @@
-import {connect} from 'react-redux';
-import _ from 'lodash';
+import { connect } from 'react-redux';
 
 import SelectPDFButton from "./SelectPDFButton";
-import {addFiles} from "../../redux/modules/filesToValidate";
+import { addFiles } from "../../redux/modules/filesToValidate";
+import { createNewJob } from '../../redux/modules/job';
 
-export const mapStateToProps = state => ({});
+export const mapStateToProps = state => ({
+    job: state.job,
+    files: state.filesToValidate
+});
 
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (dispatch, { createJob }) => ({
     onSelect: fileList => {
-        let files = _.chain(fileList)
-            .keyBy('name')
-            .mapValues(file => ({type: 'pdf'}))
-            .value();
-        dispatch(addFiles(files));
+        if (createJob) {
+            dispatch(createNewJob(fileList))
+        } else {
+            dispatch(addFiles(fileList))
+        }
     }
 });
 
