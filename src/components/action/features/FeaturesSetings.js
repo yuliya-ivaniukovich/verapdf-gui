@@ -29,7 +29,6 @@ const options = [
 class FeaturesSettings extends Component {
     render() {
         const selectedFeatures = this.props.selectedFeatures;
-        console.log(this.props);
         return (
             <div className="features">
                 <span className="feature-label">Include features:</span>

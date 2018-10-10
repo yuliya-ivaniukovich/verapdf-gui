@@ -4,7 +4,6 @@ import FeaturesSettings from './FeaturesSetings';
 
 class FeaturesAction extends Component {
     render() {
-        console.log(this.props);
         return (
             <Action
                 title="Extract Features"
