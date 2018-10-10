@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
 import Action from '../Action';
-import PolicyProfile from './PolicyProfile';
+import PolicyProfile from './PolicyProfile.container';
 
 class PolicyAction extends Component {
     render() {
@@ -18,7 +18,7 @@ class PolicyAction extends Component {
         );
     }
 }
-PolicyAction.propType = {
+PolicyAction.propTypes = {
     checked: PropTypes.bool.isRequired,
     onToggleActive: PropTypes.func.isRequired
 }
