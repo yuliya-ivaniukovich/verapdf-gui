@@ -14,7 +14,7 @@ class SelectPDFButton extends React.Component {
     }
 
     openFileDialog() {
-        this.fileInput.click();
+       this.fileInput.click();
     }
 
     onFileSelected(event) {
@@ -29,10 +29,11 @@ class SelectPDFButton extends React.Component {
                 {this.props.renderButton(this.openFileDialog)}
                 <input type="file"
                        name="packageFile"
-                       multiple
                        accept=".pdf"
                        ref={this.setFileInput}
-                       onChange={ this.onFileSelected } hidden={true}/>
+                       onChange={this.onFileSelected}
+                       hidden={true}
+                />
             </div>
         );
     }
@@ -40,7 +41,8 @@ class SelectPDFButton extends React.Component {
 
 SelectPDFButton.propTypes = {
     renderButton: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    createJob: PropTypes.bool.isRequired
 };
 
 export default SelectPDFButton;
