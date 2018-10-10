@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { featuresActions } from '../../../redux/modules/configuration/features';
 import FeaturesAction from './FeatureAction';
 
-const { toggleFeaturesActive, addSelectedFeatures } = featuresActions;
+const { toggleFeaturesActive } = featuresActions;
 
 const mapStateToProps = state => {
     return {
@@ -16,9 +16,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onToggleActive: () => {
             dispatch(toggleFeaturesActive());
-        },
-        addSelectedFeatures: selectedFeatures => {
-            dispatch(addSelectedFeatures(selectedFeatures));
         }
     };
 };
