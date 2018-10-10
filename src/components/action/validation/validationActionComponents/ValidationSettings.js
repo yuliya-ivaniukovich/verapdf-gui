@@ -44,7 +44,7 @@ class ValidationSettings extends Component {
         } = this.props;
 
         return (
-            <div>
+            <Fragment>
                 <ValidationProfile
                     porfile={profile}
                     profilesValues={profilesValues}
@@ -52,33 +52,28 @@ class ValidationSettings extends Component {
                     profileFilePath={profileFilePath}
                     getValidationProfileValue={getValidationProfileValue}
                 />
-                <div>
-                    <CheckBox
-                        checked={isFixMetadata}
-                        title="Fix metadata:"
-                        onChange={selectFixMetadata}
-                    />
-                </div>
+                <CheckBox
+                    checked={isFixMetadata}
+                    title="Fix metadata:"
+                    onChange={selectFixMetadata}
+                />
                 <Collapse isOpen={isFixMetadata}>
                     <FixMetadata
                         selectFixedFilePrefix={selectFixedFilePrefix}
                         fixedFilePrefix={fixedFilePrefix}
                     />
                 </Collapse>
-
                 <CheckBox
                     title="Include information on passed rules into the report"
                     checked={reportPassedRules}
                     onChange={toggleReportPassedRules}
                 />
-                <div className="validation-checks-fail-container">
-                    <CheckBox
-                        checked={stopValidationThreshold}
-                        title={this.renderStopValidationTitle()}
-                        onChange={toggleStopValidationThreshold}
-                    />
-                </div>
-            </div>
+                <CheckBox
+                    checked={stopValidationThreshold}
+                    title={this.renderStopValidationTitle()}
+                    onChange={toggleStopValidationThreshold}
+                />
+            </Fragment>
         );
     }
 }
