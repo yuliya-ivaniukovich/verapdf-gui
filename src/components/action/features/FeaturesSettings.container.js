@@ -7,6 +7,7 @@ const { addSelectedFeatures } = featuresActions;
 
 const mapStateToProps = state => {
     return {
+        featuresValues: state.configuration.featuresValues,
         selectedFeatures: state.configuration.features.selectedFeatures
     };
 };
