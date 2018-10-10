@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Action from '../Action';
-import FeaturesSettings from './FeaturesSetings';
+import FeaturesSettings from './FeaturesSettings';
 
 class FeaturesAction extends Component {
     render() {
