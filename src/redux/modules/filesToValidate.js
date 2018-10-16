@@ -1,6 +1,10 @@
-import {createAction, handleActions} from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
+import { mergeMap, map, catchError } from 'rxjs/operators';
+import { ofType, combineEpics } from 'redux-observable';
+import { from } from 'rxjs';
 import _ from 'lodash';
 
+import {ajax} from '../../api/api';
 
 const createFormData = files => {
     const body = new FormData()
@@ -11,7 +15,7 @@ const createFormData = files => {
 const createFileList = response => {
     if(response.message === 'File already exists') {
         alert('File already exists, please choose a new file');
-        return new Error('File already exists')
+        return new Error(response.message)
     }
      const file = _.chain([response])
             .keyBy('fileId')
@@ -21,23 +25,11 @@ const createFileList = response => {
 }
 
 //- Actions
-const addFilesRequest = createAction('FILES_TO_VALIDATE_ADD_REQUEST')
-const addFilesSuccess = createAction('FILES_TO_VALIDATE_ADD_SUCCESS')
-
-export const addFiles = (files) => {
-        return (dispatch, getState)=> {
-            const state = getState();
-            dispatch(addFilesRequest());
-            fetch(`http://localhost:8080/api/jobs/${state.job.id}/files`, {
-                method: 'POST',
-                body: createFormData(files)
-            })
-                .then(response => response.json())
-                .then(response => dispatch(addFilesSuccess(createFileList(response))))
-                .catch(error => console.error(error))
-        }
-};
-export const delFile = createAction('FILE_TO_VALIDATE_DEL');
+export const filesToValidateActions = {
+    delFile: createAction('FILE_TO_VALIDATE_DEL'),
+    addFilesRequest: createAction('FILES_TO_VALIDATE_ADD_REQUEST'),
+    addFilesSuccess: createAction('FILES_TO_VALIDATE_ADD_SUCCESS'),
+}
 
 //- State
 const initialState = {};
@@ -47,7 +39,7 @@ export default handleActions({
     FILES_TO_VALIDATE_ADD_SUCCESS: (state, action) => {
         return {
             ...state,
-            ..._.mapValues(action.payload, file => ({...file, status: null}))
+            ..._.mapValues(action.payload, file => ({...file, status: null, uploaded: true}))
         };
     },
     FILE_TO_VALIDATE_DEL: (state, action) => {
@@ -56,6 +48,22 @@ export default handleActions({
         };
     }
 }, initialState);
+
+//- Epics
+export const addFilesEpic = (action$,state$) => action$.pipe(
+    ofType('FILES_TO_VALIDATE_ADD_REQUEST'),
+    mergeMap(action => from(ajax.post(`/api/jobs/${state$.value.job.id}/files`, {
+      method: 'POST',
+      body: createFormData(action.payload)
+      }))
+        .pipe(
+            map( response => filesToValidateActions.addFilesSuccess(createFileList(response))),
+            catchError(error => console.log(error))
+  )));
+
+export const filesToValidateEpic = combineEpics(
+    addFilesEpic
+);
 
 //- Selector
 export const getFilesToValidate = state => state.filesToValidate;
