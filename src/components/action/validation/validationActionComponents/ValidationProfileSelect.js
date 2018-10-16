@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import './ValidationProfileSelect.css';
 
 class ValidationProfileSelect extends Component {
+    componentDidMount = () => {
+        this.props.getProfiles()
+    }
+
     render() {
-        const { getInputValue, profilesValues, toggleShowInput } = this.props;
+        const { getInputValue, profilesValues, toggleShowInput, isLoaded } = this.props;
         return (
             <select
                 onChange={e => {
@@ -15,8 +19,10 @@ class ValidationProfileSelect extends Component {
                 }}
                 className="validation-profile-select"
             >
-                {profilesValues.map((value, idx) => (
-                    <option key={idx}>{value}</option>
+                <option>auto-detect</option>
+                <option>custom</option>
+                {isLoaded && profilesValues.map((value, idx) => (
+                    <option key={idx}>PDF/A-{value}</option>
                 ))}
             </select>
         );
@@ -24,8 +30,10 @@ class ValidationProfileSelect extends Component {
 }
 
 ValidationProfileSelect.propTypes = {
+    profilesValues: PropTypes.array,
+    toggleShowInput: PropTypes.func.isRequired,
     getInputValue: PropTypes.func.isRequired,
-    profilesValues: PropTypes.array.isRequired
+    isLoaded: PropTypes.bool.isRequired
 };
 
 export default ValidationProfileSelect;
