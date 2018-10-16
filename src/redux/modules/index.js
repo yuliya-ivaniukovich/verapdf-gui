@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
+import { combineEpics } from 'redux-observable';
+
+import job, { jobEpic } from './job';
 import configuration from './configuration';
-import filesToValidate from './filesToValidate';
+import { profilesEpics } from './validationProfiles';
 import validationProfiles from './validationProfiles';
-import job from './job';
+import filesToValidate, { filesToValidateEpic } from './filesToValidate';
 
 export const rootReducer = combineReducers({
     job,
@@ -10,3 +13,9 @@ export const rootReducer = combineReducers({
     filesToValidate,
     validationProfiles
 });
+
+export const rootEpic = combineEpics(
+    jobEpic,
+    profilesEpics,
+    filesToValidateEpic
+)
