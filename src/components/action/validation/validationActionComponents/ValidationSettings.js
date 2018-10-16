@@ -29,7 +29,6 @@ class ValidationSettings extends Component {
     render() {
         const {
             profile,
-            profilesValues,
             profileFilePath,
             getValidationProfileValue,
             setCustomProfilePath,
@@ -47,7 +46,6 @@ class ValidationSettings extends Component {
             <Fragment>
                 <ValidationProfile
                     porfile={profile}
-                    profilesValues={profilesValues}
                     setCustomProfilePath={setCustomProfilePath}
                     profileFilePath={profileFilePath}
                     getValidationProfileValue={getValidationProfileValue}
@@ -80,7 +78,6 @@ class ValidationSettings extends Component {
 
 ValidationSettings.propTypes = {
     profile: PropTypes.string.isRequired,
-    profilesValues: PropTypes.array.isRequired,
     profileFilePath: PropTypes.string,
     getValidationProfileValue: PropTypes.func.isRequired,
     setCustomProfilePath: PropTypes.func.isRequired,
