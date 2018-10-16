@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import SelectPDFButton from "./SelectPDFButton";
-import { addFiles } from "../../redux/modules/filesToValidate";
-import { createNewJob } from '../../redux/modules/job';
+import { filesToValidateActions } from "../../redux/modules/filesToValidate";
+import { jobActions } from '../../redux/modules/job';
 
 export const mapStateToProps = state => ({
     job: state.job,
@@ -12,9 +12,9 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = (dispatch, { createJob }) => ({
     onSelect: fileList => {
         if (createJob) {
-            dispatch(createNewJob(fileList))
+            dispatch(jobActions.createJobRequest(fileList))
         } else {
-            dispatch(addFiles(fileList))
+            dispatch(filesToValidateActions.addFilesRequest(fileList))
         }
     }
 });
