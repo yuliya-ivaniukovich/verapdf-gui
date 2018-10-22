@@ -4,42 +4,30 @@ import { ofType, combineEpics } from 'redux-observable';
 import { from } from 'rxjs';
 import _ from 'lodash';
 
-import {ajax} from '../../api/api';
-
-const createFormData = files => {
-    const body = new FormData()
-    body.append('file', files[0])
-    return body;
-}
-
-const createFileList = response => {
-    if(response.message === 'File already exists') {
-        alert('File already exists, please choose a new file');
-        return new Error(response.message)
-    }
-     const file = _.chain([response])
-            .keyBy('fileId')
-            .mapValues(() => ({type: 'pdf', path: response.path}))
-            .value()
-    return file
-}
+import {FilesApi} from '../../api/files';
 
 //- Actions
 export const filesToValidateActions = {
     delFile: createAction('FILE_TO_VALIDATE_DEL'),
-    addFilesRequest: createAction('FILES_TO_VALIDATE_ADD_REQUEST'),
-    addFilesSuccess: createAction('FILES_TO_VALIDATE_ADD_SUCCESS'),
-}
+    addFile: createAction('FILE_TO_VALIDATE_ADD_REQUEST', file => file),
+    addFileSuccess: createAction('FILE_TO_VALIDATE_ADD_SUCCESS'),
+    addFileFailed: createAction('FILE_TO_VALIDATE_ADD_FAILED')
+};
 
 //- State
 const initialState = {};
 
 //- Reducers
 export default handleActions({
-    FILES_TO_VALIDATE_ADD_SUCCESS: (state, action) => {
+    FILE_TO_VALIDATE_ADD_SUCCESS: (state, action) => {
+        let {fileId, path} = action.payload;
         return {
             ...state,
-            ..._.mapValues(action.payload, file => ({...file, status: null, uploaded: true}))
+            [fileId]: {
+                type: 'pdf',
+                path,
+                status: null
+            }
         };
     },
     FILE_TO_VALIDATE_DEL: (state, action) => {
@@ -50,16 +38,15 @@ export default handleActions({
 }, initialState);
 
 //- Epics
-export const addFilesEpic = (action$,state$) => action$.pipe(
-    ofType('FILES_TO_VALIDATE_ADD_REQUEST'),
-    mergeMap(action => from(ajax.post(`/api/jobs/${state$.value.job.id}/files`, {
-      method: 'POST',
-      body: createFormData(action.payload)
-      }))
-        .pipe(
-            map( response => filesToValidateActions.addFilesSuccess(createFileList(response))),
-            catchError(error => console.log(error))
-  )));
+export const addFilesEpic = (action$, state$) => action$.pipe(
+    ofType(filesToValidateActions.addFile.toString()),
+    mergeMap(action =>
+        from(FilesApi.uploadFile(state$.value.job.id, action.payload)).pipe(
+            map(file => filesToValidateActions.addFileSuccess(file)),
+            catchError(error => filesToValidateActions.addFileFailed())
+        )
+    )
+);
 
 export const filesToValidateEpic = combineEpics(
     addFilesEpic

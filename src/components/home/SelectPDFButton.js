@@ -19,7 +19,7 @@ class SelectPDFButton extends React.Component {
 
     onFileSelected(event) {
         if (event.target.files.length > 0) {
-            this.props.onSelect(event.target.files);
+            this.props.onSelect(event.target.files[0]);
         }
     }
 
@@ -41,8 +41,7 @@ class SelectPDFButton extends React.Component {
 
 SelectPDFButton.propTypes = {
     renderButton: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    createJob: PropTypes.bool.isRequired
+    onSelect: PropTypes.func.isRequired
 };
 
 export default SelectPDFButton;

@@ -4,21 +4,20 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 
 import { filesToValidateActions } from './filesToValidate';
-import { ajax } from '../../api/api';
+import { JobApi } from '../../api/job';
 
 //- Actions
 export const jobActions = {
-    createJobRequest: createAction('NEW_JOB_CREATE_REQUEST'),
+    createJob: createAction('NEW_JOB_CREATE_REQUEST', () => ({}), file => ({file})),
     createJobSuccess: createAction('NEW_JOB_CREATE_SUCCESS', jobId => jobId, (jobId, file) => ({file})),
-    createJobFail: createAction('NEW_JOB_CREATE_FAILED')
-}
+    createJobFail: createAction('NEW_JOB_CREATE_FAILED', message => message)
+};
 
 //- State
 const initialState = {
     id: null,
     isLoading: false,
-    created: false,
-    error: false
+    error: null
 };
 
 //- Reducers
@@ -31,34 +30,34 @@ export default handleActions(
         NEW_JOB_CREATE_SUCCESS: (state, action) => ({
             ...state,
             id: action.payload,
-            created: true,
             isLoading: false 
         }),
-        NEW_JOB_CREATE_FAILED: state => ({
+        NEW_JOB_CREATE_FAILED: (state, action) => ({
             ...state,
-            error: true 
-        }),
+            error: action.payload,
+            isLoading: false
+        })
     },
     initialState
 );
 
 // - Epics 
 const createNewJobEpic = action$ => action$.pipe(
-    ofType('NEW_JOB_CREATE_REQUEST'),
-    mergeMap(action => from(ajax.post('api/jobs', { method: 'POST' }))
-        .pipe(
-            map(response => jobActions.createJobSuccess(response.jobId, action.payload)),
-            catchError(error => of(jobActions.createJobFail()))
+    ofType(jobActions.createJob.toString()),
+    mergeMap(action =>
+        from(JobApi.createJob()).pipe(
+            map(job => jobActions.createJobSuccess(job.jobId, action.meta.file)),
+            catchError(error => of(jobActions.createJobFail(error.message)))
         )
     )
-)
+);
 
 const addFilesEpic = action$ => action$.pipe(
-    ofType('NEW_JOB_CREATE_SUCCESS'),
-    map(action=> filesToValidateActions.addFilesRequest(action.meta.file))
-)
+    ofType(jobActions.createJobSuccess.toString()),
+    map(action => filesToValidateActions.addFile(action.meta.file))
+);
 
 export const jobEpic = combineEpics(
     createNewJobEpic,
     addFilesEpic
-)
+);

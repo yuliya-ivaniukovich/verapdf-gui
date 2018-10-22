@@ -3,14 +3,14 @@ import { ofType, combineEpics } from 'redux-observable';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 
-import { ajax } from '../../api/api';
+import { SettingsApi } from '../../api/settings';
 
 // - Actions
 export const profileActions = {
     loadProfiles: createAction('PROFILES_LOAD_REQUEST'),
     loadProfilesSuccess: createAction('PROFILES_LOAD_SUCCESS'),
-    loadProfilesFailed: createAction('POFILES_LOAD_FAILED')
-}
+    loadProfilesFailed: createAction('PROFILES_LOAD_FAILED')
+};
 
 // - State
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
     isLoading: false,
     isLoaded: false,
     error: false
-}
+};
 
 // - Reducer
 export default handleActions({
@@ -38,17 +38,17 @@ export default handleActions({
     })
 }, initialState);
 
-// - Epiics
+// - Epics
 const getProfilesEpic = action$ => action$.pipe(
-    ofType('PROFILES_LOAD_REQUEST'),
-    mergeMap(action => from(ajax.get('api/vera/profiles'))
-        .pipe(
+    ofType(profileActions.loadProfiles.toString()),
+    mergeMap(() =>
+        from(SettingsApi.getProfiles()).pipe(
             map(response => profileActions.loadProfilesSuccess(response)),
             catchError(error => of(profileActions.loadProfilesFailed(error)))
         )
     )
-)
+);
 
 export const profilesEpics = combineEpics(
     getProfilesEpic
-)
+);
