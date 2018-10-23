@@ -11,7 +11,7 @@ class CheckBox extends React.Component {
         return (
             <div className="check-box-container">
                 <div className="check-box" onClick={this.props.onChange}>
-                    <MaterialIcon icon={checkBox}/>
+                    <MaterialIcon icon={checkBox} />
                 </div>
                 <div className="title">{this.props.title}</div>
             </div>
@@ -21,7 +21,10 @@ class CheckBox extends React.Component {
 
 CheckBox.propTypes = {
     checked: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element,
+    ]),
     onChange: PropTypes.func.isRequired
 };
 
