@@ -1,5 +1,6 @@
-
-.action .disabled-btn, .action .closed-btn, .action .opened-btn {
+.action .disabled-btn,
+.action .closed-btn,
+.action .opened-btn {
     display: inline-block;
     height: 32px;
     cursor: pointer;
@@ -27,7 +28,56 @@
     color: inherit;
 }
 
-.action .collapse, .collapsing {
+.action .collapse,
+.collapsing {
     position: relative;
     top: -5px;
+}
+.action .features {
+    margin-left: 20px;
+}
+.action .feature-label {
+    font-family: sans-serif;
+    display: inline-block;
+    margin-right: 23px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.action .select {
+    display: inline-block;
+    width: 85%;
+    border-radius: 10px;
+}
+.action .policy {
+    margin-left: 20px;
+}
+.action .policy-file-label {
+    display: inline-block;
+    margin-right: 66px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.action .policy-input-file {
+    width: 86.3%;
+    display: inline-block;
+    padding: 3px;
+}
+.action .policy-input-file-name {
+    height: 28px;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 94%;
+    border: 1px solid #b7b7b7;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    outline: none;
+}
+.action .policy-file-select-btn {
+    background-color: #6aa84f;
+    color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #62974d;
 }
