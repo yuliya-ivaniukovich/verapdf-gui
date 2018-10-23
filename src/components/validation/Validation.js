@@ -1,7 +1,7 @@
 import React from 'react';
 import ValidationAction from '../action/validation/ValidationAction.container';
-import FeaturesAction from '../action/FeaturesAction.container';
-import PolicyAction from '../action/PolicyAction.container';
+import FeaturesAction from '../action/features/FeaturesAction.container';
+import PolicyAction from '../action/policy/PolicyAction.container';
 import SelectedFiles from '../files/SelectedFiles.container';
 
 import './Validation.css';
