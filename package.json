@@ -35,8 +35,8 @@
     "electron-pack": "react-scripts build && build --em.main=build/electron.js"
   },
   "devDependencies": {
-    "electron": "^1.8.2",
-    "electron-builder": "^20.0.8"
+    "electron": "^3.0.6",
+    "electron-builder": "^20.29.0"
   },
   "proxy": {
     "/api/": {
