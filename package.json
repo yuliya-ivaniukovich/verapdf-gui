@@ -31,12 +31,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron-start": "electron .",
-    "electron-pack": "react-scripts build && build --em.main=build/electron.js"
+    "electron-dev" : "cross-env NODE_ENV=development electron .",
+    "electron-start": "concurrently \"set BROWSER=none&& npm start\" \"wait-on http://localhost:3000 && npm run electron-dev\"",
+    "electron-pack": "react-scripts build && build -c.extraMetadata.main=build/electron.js"
   },
   "devDependencies": {
+    "concurrently": "^4.0.1",
+    "cross-env": "^5.2.0",
     "electron": "^3.0.6",
-    "electron-builder": "^20.29.0"
+    "electron-builder": "^20.29.0",
+    "wait-on": "^3.1.0"
   },
   "proxy": {
     "/api/": {
