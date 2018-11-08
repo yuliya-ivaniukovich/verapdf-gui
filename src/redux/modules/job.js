@@ -51,10 +51,16 @@ const createNewJobEpic = action$ => action$.pipe(
         )
     )
 );
-
 const addFilesEpic = action$ => action$.pipe(
     ofType(jobActions.createJobSuccess.toString()),
-    map(action => filesToValidateActions.addFile(action.meta.file))
+    map(action => {
+        const isElectron = (window.location.search.includes('electron=true') || window.location.protocol === 'file:');
+        if (isElectron) {
+            return filesToValidateActions.addLocalFile(action.meta.file)
+        } else {
+            return filesToValidateActions.addFile(action.meta.file)
+        }
+    })
 );
 
 export const jobEpic = combineEpics(
