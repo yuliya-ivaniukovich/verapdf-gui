@@ -1,7 +1,7 @@
-import {handleResponse} from './base';
+import {handleResponse, defaultUrl} from './base';
 
 export const SettingsApi = {
     getProfiles() {
-        return fetch('/api/vera/profiles').then(handleResponse);
+        return fetch(`${defaultUrl}/api/vera/profiles`).then(handleResponse);
     }
 };
