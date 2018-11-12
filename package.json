@@ -6,8 +6,9 @@
   "homepage": "./",
   "build": {
     "asar": true,
-    "files": "*/**",
-    "extends": null
+    "files": ["*/**", "icon.png"],
+    "extends": null,
+    "icon": "build/icon.png"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
@@ -33,7 +34,7 @@
     "eject": "react-scripts eject",
     "electron-dev" : "cross-env NODE_ENV=development electron .",
     "electron-start": "concurrently \"set BROWSER=none&& npm start\" \"wait-on http://localhost:3000 && npm run electron-dev\"",
-    "electron-pack": "react-scripts build && build -c.extraMetadata.main=build/electron.js --publish=never"
+    "electron-pack": "react-scripts build && build -c.extraMetadata.main=build/electron.js -c.extraMetadata.name=veraPDF --publish=never"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",
