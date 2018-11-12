@@ -14,7 +14,7 @@ function createWindow() {
         height: 680
     });
     // Url is either set using environment variable (see .env, used for dev) or index.html file (for prod)
-    const startUrl = false
+    const startUrl = isDev
         ? 'http://localhost:3000/'
         : format({
             pathname: join(__dirname, '/../build/index.html'),
