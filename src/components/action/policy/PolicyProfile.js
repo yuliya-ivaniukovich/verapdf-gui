@@ -33,7 +33,7 @@ class PolicyProfile extends Component {
                         className="policy-file-select-btn"
                         onClick={this.clickTrigger}
                     >
-                        select
+                        Browse
                     </button>
                 </div>
             </div>
