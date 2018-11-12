@@ -1,0 +1,1 @@
+export const isElectron = window.location.search.includes('electron=true');

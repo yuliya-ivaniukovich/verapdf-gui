@@ -10,7 +10,6 @@ import {FilesApi} from '../../api/files';
 export const filesToValidateActions = {
     delFile: createAction('FILE_TO_VALIDATE_DEL'),
     addFile: createAction('FILE_TO_VALIDATE_ADD_REQUEST', file => file),
-    addLocalFile: createAction('LOCAL_FILE_TO_VALIDATE_ADD_REQUEST', file => file.path),
     addFileSuccess: createAction('FILE_TO_VALIDATE_ADD_SUCCESS'),
     addFileFailed: createAction('FILE_TO_VALIDATE_ADD_FAILED')
 };
@@ -48,19 +47,9 @@ export const addFilesEpic = (action$, state$) => action$.pipe(
         )
     )
 );
-export const addLocalFilesEpic = (action$, state$) => action$.pipe(
-    ofType(filesToValidateActions.addLocalFile.toString()),
-    mergeMap(action => 
-        from(FilesApi.uploadLocalFile(state$.value.job.id, action.payload)).pipe(
-            map(file => filesToValidateActions.addFileSuccess(file)),
-            catchError(error => filesToValidateActions.addFileFailed())
-        )
-    )
-);
 
 export const filesToValidateEpic = combineEpics(
-    addFilesEpic,
-    addLocalFilesEpic
+    addFilesEpic
 );
 
 //- Selector
