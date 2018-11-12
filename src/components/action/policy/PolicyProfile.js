@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isElectron } from '../../../enviroment';
 
 class PolicyProfile extends Component {
     policyFileInput = null;
@@ -16,11 +17,13 @@ class PolicyProfile extends Component {
                         className="policy-input-file-hidden"
                         type="file"
                         hidden
-                        ref={value => (this.policyFileInput = value)}
+                        ref={input => (this.policyFileInput = input)}
                         onChange={() => {
-                            this.props.getPolicyFilePath(
-                                this.policyFileInput.value
-                            );
+                            if(!isElectron) {
+                                this.props.getPolicyFilePath(this.policyFileInput.value);
+                            } else {
+                                this.props.getPolicyFilePath(this.policyFileInput.files[0].path);
+                            }
                         }}
                     />
                     <input
