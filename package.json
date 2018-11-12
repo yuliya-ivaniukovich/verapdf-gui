@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "electron-dev" : "cross-env NODE_ENV=development electron .",
     "electron-start": "concurrently \"set BROWSER=none&& npm start\" \"wait-on http://localhost:3000 && npm run electron-dev\"",
-    "electron-pack": "react-scripts build && build -c.extraMetadata.main=build/electron.js"
+    "electron-pack": "react-scripts build && build -c.extraMetadata.main=build/electron.js --publish=never"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",
