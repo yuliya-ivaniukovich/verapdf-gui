@@ -11,9 +11,7 @@ export const mapDispatchToProps = (dispatch, { createJob }) => ({
         if (createJob) {
             dispatch(jobActions.createJob(file))
         } else {
-            const isElectron = window.location.search.includes('electron=true') || window.location.protocol === 'file:' ;
-            isElectron ? dispatch(filesToValidateActions.addLocalFile(file)):
-                        dispatch(filesToValidateActions.addFile(file));
+            dispatch(filesToValidateActions.addFile(file));
         }
     }
 });
