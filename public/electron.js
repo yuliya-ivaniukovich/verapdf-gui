@@ -1,33 +1,57 @@
 const {app, BrowserWindow} = require('electron');
 const {join} = require('path');
 const {format} = require('url');
-let isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
 function createWindow() {
-    mainWindow = isDev ? new BrowserWindow({
+    // Create the browser window.
+    mainWindow = new BrowserWindow({
         width: 900,
-        height: 680,
-    }) : new BrowserWindow({ width: 900, height: 680 });
-    const startUrl = isDev
-        ? 'http://localhost:3000/?electron=true'
+        height: 680
+    });
+    // Url is either set using environment variable (see .env, used for dev) or index.html file (for prod)
+    const startUrl = false
+        ? 'http://localhost:3000/'
         : format({
             pathname: join(__dirname, '/../build/index.html'),
             protocol: 'file:',
             slashes: true
         });
-    mainWindow.loadURL(startUrl);
-    mainWindow.on('closed', () => mainWindow = null);
+    // Load start url of the app.
+    mainWindow.loadURL(startUrl + '?electron=true');
+    // Open the DevTools.
+    //win.webContents.openDevTools()
+
+    // Emitted when the window is closed.
+    mainWindow.on('closed', () => {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        mainWindow = null
+    });
 }
 
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
+// Quit when all windows are closed.
 app.on('window-all-closed', () => {
+    // On macOS it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit();
     }
 });
 
 app.on('activate', () => {
+    // On macOS it's common to re-create a window in the app when th
+    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow();
     }
