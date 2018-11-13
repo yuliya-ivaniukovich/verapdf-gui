@@ -9,10 +9,8 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({
-        width: 900,
-        height: 680
-    });
+    mainWindow = new BrowserWindow({width: 900, height: 680});
+
     // Url is either set using environment variable (see .env, used for dev) or index.html file (for prod)
     const startUrl = isDev
         ? 'http://localhost:3000/'
@@ -21,8 +19,10 @@ function createWindow() {
             protocol: 'file:',
             slashes: true
         });
+
     // Load start url of the app.
     mainWindow.loadURL(startUrl + '?electron=true');
+
     // Open the DevTools.
     //win.webContents.openDevTools()
 
@@ -50,7 +50,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-    // On macOS it's common to re-create a window in the app when th
+    // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow();

@@ -1,4 +1,7 @@
-export const defaultUrl = process.env.NODE_ENV === 'development' ?  '' : 'http://localhost:8080';
+import {isElectron} from '../enviroment';
+
+export const baseUrl = isElectron ? 'http://localhost:8080' : '';
+
 export const handleResponse = response => {
     if (!response.ok) {
         return response.json().then(error => {
