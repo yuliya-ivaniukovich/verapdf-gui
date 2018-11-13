@@ -54,7 +54,7 @@ const createNewJobEpic = action$ => action$.pipe(
 
 const addFilesEpic = action$ => action$.pipe(
     ofType(jobActions.createJobSuccess.toString()),
-    map(action => (filesToValidateActions.addFile(action.meta.file)))
+    map(action => filesToValidateActions.addFile(action.meta.file))
 );
 
 export const jobEpic = combineEpics(

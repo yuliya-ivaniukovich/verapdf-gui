@@ -1,25 +1,21 @@
-import {handleResponse, defaultUrl} from './base';
+import {handleResponse, baseUrl} from './base';
 import { isElectron } from '../enviroment';
 
 export const FilesApi = {
     uploadFile(jobId, file) {
+        const request = {
+            method: 'POST'
+        };
         if (isElectron) {
-            const body = JSON.stringify({type: 'LOCAL',path: file.path});
-            return fetch(`${defaultUrl}/api/jobs/${jobId}/files`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body
-            }).then(handleResponse);
+            request.headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            };
+            request.body = JSON.stringify({type: 'LOCAL', path: file.path});
         } else {
-            const body = new FormData();
-            body.append('file', file);
-            return fetch(`${defaultUrl}/api/jobs/${jobId}/files`, {
-                method: 'POST', 
-                body
-            }).then(handleResponse);
+            request.body = new FormData();
+            request.body.append('file', file);
         }
+        return fetch(`${baseUrl}/api/jobs/${jobId}/files`, request).then(handleResponse);
     }
 }; 

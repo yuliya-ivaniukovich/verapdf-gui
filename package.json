@@ -6,7 +6,7 @@
   "homepage": "./",
   "build": {
     "asar": true,
-    "files": ["*/**", "icon.png"],
+    "files": "*/**",
     "extends": null,
     "icon": "build/icon.png"
   },
