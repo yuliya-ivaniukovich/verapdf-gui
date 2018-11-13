@@ -26,10 +26,11 @@ class SelectedFiles extends React.Component {
     }
 
     renderFiles() {
+        const ids = _.keys(this.props.files)
         return (
-            _.keys(this.props.files)
-                .map(file => {
-                    return (<File key={file} path={file}/>);
+            _.values(this.props.files)
+                .map((file, idx) => {
+                    return (<File key={ids[idx]} id={ids[idx]} path={file.path}/>);
                 })
         );
     }
@@ -43,7 +44,7 @@ class SelectedFiles extends React.Component {
                 <Collapse isOpen={this.state.open}>
                     {this.renderFiles()}
                 </Collapse>
-                <SelectPDFButton renderButton={(openFileDialog) => {
+                <SelectPDFButton createJob={false} renderButton={(openFileDialog) => {
                     return (
                         <div className="files-button" onClick={openFileDialog}>
                             <MaterialIcon icon="add_circle_outline"/>

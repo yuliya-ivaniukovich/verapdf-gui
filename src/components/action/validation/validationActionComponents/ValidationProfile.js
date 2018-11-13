@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import ValidationProfileSelect from './ValidationProfileSelect';
+import ValidationProfileSelect from './ValidattionProfileSelect.container';
 
 class ValidationProfile extends Component {
     state = {
@@ -25,7 +25,6 @@ class ValidationProfile extends Component {
             setCustomProfilePath,
             profileFilePath,
             getValidationProfileValue,
-            profilesValues
         } = this.props;
 
         return (
@@ -33,7 +32,6 @@ class ValidationProfile extends Component {
                 <span>ValidationProfile:</span>
                 <ValidationProfileSelect
                     toggleShowInput={this.toggleShowInput}
-                    profilesValues={profilesValues}
                     getInputValue={getValidationProfileValue}
                 />
                 <input
@@ -66,7 +64,6 @@ ValidationProfile.propTypes = {
     setCustomProfilePath: PropTypes.func.isRequired,
     profileFilePath: PropTypes.string,
     getValidationProfileValue: PropTypes.func.isRequired,
-    profilesValues: PropTypes.array.isRequired
 };
 
 export default ValidationProfile;
