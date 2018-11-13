@@ -1,3 +1,7 @@
+import {isElectron} from '../enviroment';
+
+export const baseUrl = isElectron ? 'http://localhost:8080' : '';
+
 export const handleResponse = response => {
     if (!response.ok) {
         return response.json().then(error => {

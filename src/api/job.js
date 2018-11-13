@@ -1,7 +1,7 @@
-import {handleResponse} from './base';
+import {handleResponse, baseUrl} from './base';
 
 export const JobApi = {
     createJob() {
-        return fetch(`/api/jobs`, { method: 'POST' }).then(handleResponse);
+        return fetch(`${baseUrl}/api/jobs`, { method: 'POST' }).then(handleResponse);
     }
 };

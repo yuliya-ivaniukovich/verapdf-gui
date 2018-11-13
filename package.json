@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
+  "homepage": "./",
   "build": {
     "asar": true,
     "files": "*/**",
-    "extends": null
+    "extends": null,
+    "icon": "build/icon.png"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
@@ -29,11 +31,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-dev" : "cross-env NODE_ENV=development electron .",
+    "electron-start": "concurrently \"set BROWSER=none&& npm start\" \"wait-on http://localhost:3000 && npm run electron-dev\"",
+    "electron-pack": "react-scripts build && build -c.extraMetadata.main=build/electron.js -c.extraMetadata.name=veraPDF --publish=never"
   },
   "devDependencies": {
-    "electron": "^1.8.2",
-    "electron-builder": "^20.0.8"
+    "concurrently": "^4.0.1",
+    "cross-env": "^5.2.0",
+    "electron": "^3.0.6",
+    "electron-builder": "^20.29.0",
+    "wait-on": "^3.1.0"
   },
   "proxy": {
     "/api/": {

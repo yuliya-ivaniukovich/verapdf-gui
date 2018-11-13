@@ -9,9 +9,9 @@ export const mapStateToProps = () => ({});
 export const mapDispatchToProps = (dispatch, { createJob }) => ({
     onSelect: file => {
         if (createJob) {
-            dispatch(jobActions.createJob(file))
+            dispatch(jobActions.createJob(file));
         } else {
-            dispatch(filesToValidateActions.addFile(file))
+            dispatch(filesToValidateActions.addFile(file));
         }
     }
 });
